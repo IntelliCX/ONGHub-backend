@@ -12,8 +12,11 @@ import java.util.UUID;
 public interface PostsRepository extends JpaRepository<PostModel, UUID> {
 
     @Override
-    @Query("select e from ONGModel e where e.deletedAt=null")
+    @Query("select e from PostModel e where e.deletedAt=null")
     List<PostModel> findAll();
+
+    @Query("select e from PostModel e where e.deletedAt=null and e.ong.id=?1")
+    List<PostModel> findAllONGPosts(UUID ongId);
 
     @Query("update PostModel e set e.deletedAt=CURRENT_DATE where e.id=?1")
     @Modifying

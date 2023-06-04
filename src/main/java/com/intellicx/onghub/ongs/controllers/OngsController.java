@@ -2,10 +2,7 @@ package com.intellicx.onghub.ongs.controllers;
 
 import com.intellicx.onghub.ongs.dtos.CreateOrUpdateOngDto;
 import com.intellicx.onghub.ongs.models.ONGModel;
-import com.intellicx.onghub.ongs.services.CreateOngService;
-import com.intellicx.onghub.ongs.services.DeleteOngService;
-import com.intellicx.onghub.ongs.services.GetAllOngsService;
-import com.intellicx.onghub.ongs.services.UpdateOngService;
+import com.intellicx.onghub.ongs.services.*;
 import com.intellicx.onghub.shared.annotations.GlobalController;
 import com.intellicx.onghub.shared.generics.GenericResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -70,9 +67,9 @@ public class OngsController {
     }
 
     @Operation(summary = "Deletes an ONG", description = "Deletes an ONG")
-    @ApiResponse(responseCode = "200", description = "ONG not found", content = @Content(schema = @Schema(example = "{ \"data\": \"ONG successfully deleted\" }")))
+    @ApiResponse(responseCode = "200", description = "ONG deleted", content = @Content(schema = @Schema(implementation = ONGModel.class)))
     @ApiResponse(responseCode = "404", description = "ONG not found", content = @Content(schema = @Schema(example = "{ \"data\": \"ONG not found\" }")))
-    @PutMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     ResponseEntity<Object> deleteOng(@PathVariable UUID id) {
         GenericResponse response = this.deleteOngService.execute(id);
 

@@ -24,11 +24,11 @@ public class ONGModel {
     @Column(nullable = false)
     private String email;
 
-    @Column()
-    private String pix;
+    @Column(name = "pix_key")
+    private String pixKey;
 
-    @Column()
-    private String siteUrl;
+    @Column(name = "website_url")
+    private String websiteUrl;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp

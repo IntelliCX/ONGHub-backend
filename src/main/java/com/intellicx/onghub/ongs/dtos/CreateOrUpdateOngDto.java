@@ -21,10 +21,10 @@ public class CreateOrUpdateOngDto {
     @Schema(example = "ONG pix key")
     @NotNull(message = "ONG pix key is mandatory!")
     @Size(max = 255)
-    private String pix;
+    private String pixKey;
 
     @Schema(example = "ONG website url")
     @NotNull(message = "ONG website url is mandatory!")
     @Size(max = 255)
-    private String siteUrl;
+    private String websiteUrl;
 }

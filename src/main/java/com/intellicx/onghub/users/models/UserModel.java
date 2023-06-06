@@ -16,7 +16,6 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
     private UUID id;
 
     @Column(nullable = false)

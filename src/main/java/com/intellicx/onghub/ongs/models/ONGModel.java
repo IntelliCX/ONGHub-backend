@@ -1,28 +1,17 @@
 package com.intellicx.onghub.ongs.models;
 
+import com.intellicx.onghub.users.models.UserModel;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Table(name = "tb_ongs")
 @Entity
-public class ONGModel {
-    private static final UUID serialVersionUID = new UUID(1L, 1L);
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String email;
+public class ONGModel extends UserModel {
+    public ONGModel() {
+        this.setRole("ONG");
+    }
 
     @Column(name = "pix_key")
     private String pixKey;
@@ -30,14 +19,4 @@ public class ONGModel {
     @Column(name = "website_url")
     private String websiteUrl;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
-    @CreationTimestamp
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    private Date updatedAt;
-
-    @Column(name = "deleted_at")
-    private Date deletedAt;
 }

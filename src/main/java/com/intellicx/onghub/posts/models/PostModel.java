@@ -1,16 +1,18 @@
 package com.intellicx.onghub.posts.models;
 
 import com.intellicx.onghub.ongs.models.ONGModel;
+import com.intellicx.onghub.users.models.UserModel;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.sql.rowset.serial.SerialBlob;
 import java.util.Date;
 import java.util.UUID;
 
 @Data
-@Table(name = "tb_profiles")
+@Table(name = "tb_posts")
 @Entity
 public class PostModel {
 
@@ -21,8 +23,8 @@ public class PostModel {
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id", referencedColumnName = "id", nullable = false)
-    private ONGModel ong;
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private UserModel user;
 
     @Column()
     private String caption;
@@ -41,4 +43,12 @@ public class PostModel {
 
     @Column(name = "deleted_at")
     private Date deletedAt;
+
+    public void setPicture(SerialBlob serialBlob) {
+        try {
+            this.picture = serialBlob.getBytes(1, (int) serialBlob.length());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

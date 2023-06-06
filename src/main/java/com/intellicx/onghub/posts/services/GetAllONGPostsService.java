@@ -19,7 +19,7 @@ public class GetAllONGPostsService {
     }
 
     public GenericResponse<List<PostModel>> execute(UUID ongId) {
-        return new GenericResponse(200, new ResponseData(postsRepository.findAllONGPosts(ongId)));
+        return new GenericResponse(200, new ResponseData(postsRepository.findAllUserPosts(ongId)));
     }
 
 }

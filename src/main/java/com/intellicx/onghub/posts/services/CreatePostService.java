@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class CreatePostService {
     private final PostsRepository postsRepository;
-    private SerialBlob parsedImg;
+    private SerialBlob parsedImg = null;
     public CreatePostService(PostsRepository postsRepository) {
         this.postsRepository = postsRepository;
     }
@@ -25,9 +25,9 @@ public class CreatePostService {
     public GenericResponse<PostModel> execute(CreatePostDto createPostDto, BindingResult validationResult) {
         if(validationResult.hasErrors()) return new GenericResponse(400, new ResponseData(validationResult.getAllErrors()));
 
-        Optional<PostModel> mcommerce = postsRepository.findById(createPostDto.getOngId());
+        Optional<PostModel> ong = postsRepository.findById(createPostDto.getOngId());
 
-        if (mcommerce.isEmpty()) return new GenericResponse(404, new ResponseData("ONG not found!"));
+        if (ong.isEmpty()) return new GenericResponse(404, new ResponseData("ONG not found!"));
 
         String picture = createPostDto.getPicture();
 
@@ -39,8 +39,8 @@ public class CreatePostService {
             }
 
         PostModel post = new PostModel();
-
         BeanUtils.copyProperties(createPostDto, post);
+        post.setPicture(parsedImg);
 
         PostModel createdPost = postsRepository.saveAndFlush(post);
 

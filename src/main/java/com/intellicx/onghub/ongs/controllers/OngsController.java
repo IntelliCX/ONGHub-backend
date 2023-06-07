@@ -24,14 +24,17 @@ public class OngsController {
 
     private final GetAllOngsService getAllOngsService;
 
+    private final GetOngByIdService getOngByIdService;
+
     private final CreateOngService createOngService;
 
     private final UpdateOngService updateOngService;
 
     private final DeleteOngService deleteOngService;
 
-    public OngsController(GetAllOngsService getAllOngsService, CreateOngService createOngService, UpdateOngService updateOngService, DeleteOngService deleteOngService) {
+    public OngsController(GetAllOngsService getAllOngsService, GetOngByIdService getOngByIdService, CreateOngService createOngService, UpdateOngService updateOngService, DeleteOngService deleteOngService) {
         this.getAllOngsService = getAllOngsService;
+        this.getOngByIdService = getOngByIdService;
         this.createOngService = createOngService;
         this.updateOngService = updateOngService;
         this.deleteOngService = deleteOngService;
@@ -42,6 +45,16 @@ public class OngsController {
     @GetMapping()
     ResponseEntity<Object> getAllOngs() {
         GenericResponse response = this.getAllOngsService.execute();
+
+        return ResponseEntity.status(response.status()).body(response.data());
+    }
+
+    @Operation(summary = "Get an ONG by id", description = "Get an ONG by id")
+    @ApiResponse(responseCode = "200", description = "ONG found", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ONGModel.class))))
+    @ApiResponse(responseCode = "404", description = "ONG not found", content = @Content(schema = @Schema(example = "{ \"data\": \"ONG not found!\"}")))
+    @GetMapping("/{ongId}")
+    ResponseEntity<Object> getOngById(@PathVariable UUID ongId) {
+        GenericResponse response = this.getOngByIdService.execute(ongId);
 
         return ResponseEntity.status(response.status()).body(response.data());
     }

@@ -18,6 +18,10 @@ public interface OngsRepository extends JpaRepository<ONGModel, UUID> {
     @Query("select e from ONGModel e where e.deletedAt=null")
     List<ONGModel> findAll();
 
+    @Override
+    @Query("select e from ONGModel e where e.deletedAt=null AND e.id=?1")
+    Optional<ONGModel> findById(UUID id);
+
     @Transactional
     @Query("update ONGModel e set e.deletedAt=CURRENT_DATE where e.id=?1")
     @Modifying

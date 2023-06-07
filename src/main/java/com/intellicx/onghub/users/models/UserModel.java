@@ -27,6 +27,9 @@ public class UserModel {
     @Column(nullable = false)
     private String email;
 
+    @Column()
+    private String cellphone;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
     private Date createdAt;

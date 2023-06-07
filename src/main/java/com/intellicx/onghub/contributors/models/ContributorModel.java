@@ -19,4 +19,7 @@ public class ContributorModel extends UserModel {
     })
     private List<ONGModel> ongs;
 
+    public ContributorModel() {
+        this.setRole("CONTRIBUTOR");
+    }
 }

@@ -24,7 +24,7 @@ public class CreateOrUpdateContributorDto {
     @NotNull(message = "Contributor email is mandatory!")
     private String email;
 
-    @Schema(example = "Contributor email")
+    @Schema(example = "Contributor cellphone")
     @Size(max = 11)
     private String cellphone;
 }

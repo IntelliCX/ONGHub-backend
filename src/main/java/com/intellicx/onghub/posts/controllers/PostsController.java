@@ -47,7 +47,7 @@ public class PostsController {
     @Operation(summary = "Lists all user's posts", description = "Lists all user's posts")
     @ApiResponse(responseCode = "200", description = "User's shared posts", content = @Content(array = @ArraySchema(schema = @Schema(implementation = PostModel.class))))
     @GetMapping("/{userId}")
-    ResponseEntity<Object> getONGPosts(@PathVariable UUID userId){
+    ResponseEntity<Object> getUserPosts(@PathVariable UUID userId){
         GenericResponse response = getAllUserPostsService.execute(userId);
 
         return ResponseEntity.status(response.status()).body(response.data());

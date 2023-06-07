@@ -34,13 +34,13 @@ public class CreateContributorService {
 
         List<UUID> ongsIds = createOrUpdateContributorDto.getOngsIds();
 
-        List<ONGModel> contributorOngs = null;
+        if (!ongsIds.isEmpty()) {
+            List<ONGModel> contributorOngs = ongsRepository.findAllById(ongsIds);
 
-        if (!ongsIds.isEmpty()) contributorOngs = ongsRepository.findAllById(ongsIds);
+            if (contributorOngs.isEmpty()) return new GenericResponse<>(404, new ResponseData<>("ONGs not found!"));
 
-        if (contributorOngs.isEmpty()) return new GenericResponse<>(404, new ResponseData<>("ONGs not found!"));
-
-        contributorModel.setOngs(contributorOngs);
+            contributorModel.setOngs(contributorOngs);
+        }
 
         ContributorModel createdContributor = contributorsRepository.save(contributorModel);
 

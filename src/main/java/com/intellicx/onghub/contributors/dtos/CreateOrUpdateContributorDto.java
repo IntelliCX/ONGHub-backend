@@ -12,6 +12,7 @@ import java.util.UUID;
 @Data
 public class CreateOrUpdateContributorDto {
     @ArraySchema(schema = @Schema(implementation = UUID.class))
+    @NotNull(message = "If contributor does not contribute to any ong pass an empty list!")
     private List<UUID> ongsIds;
 
     @Schema(example = "Contributor name")

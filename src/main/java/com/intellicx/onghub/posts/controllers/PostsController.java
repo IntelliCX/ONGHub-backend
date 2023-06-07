@@ -2,6 +2,7 @@ package com.intellicx.onghub.posts.controllers;
 
 import com.intellicx.onghub.posts.dtos.CreatePostDto;
 import com.intellicx.onghub.posts.models.PostModel;
+import com.intellicx.onghub.posts.services.AskToGPTCreateCaptionService;
 import com.intellicx.onghub.posts.services.CreatePostService;
 import com.intellicx.onghub.posts.services.GetAllUserPostsService;
 import com.intellicx.onghub.posts.services.GetAllPostsService;
@@ -26,13 +27,14 @@ import java.util.UUID;
 public class PostsController {
     private final CreatePostService createPostService;
     private final GetAllPostsService getAllPostsService;
-
     private final GetAllUserPostsService getAllUserPostsService;
+    private final AskToGPTCreateCaptionService askToGPTCreateCaptionService;
 
-    public PostsController (CreatePostService createPostService, GetAllPostsService getAllPostsService, GetAllUserPostsService getAllUserPostsService) {
+    public PostsController (CreatePostService createPostService, GetAllPostsService getAllPostsService, GetAllUserPostsService getAllUserPostsService, AskToGPTCreateCaptionService askToGPTCreateCaptionService) {
         this.createPostService = createPostService;
         this.getAllPostsService = getAllPostsService;
         this.getAllUserPostsService = getAllUserPostsService;
+        this.askToGPTCreateCaptionService = askToGPTCreateCaptionService;
     }
 
     @Operation(summary = "Lists all posts", description = "Lists all posts")
@@ -49,6 +51,15 @@ public class PostsController {
     @GetMapping("/{userId}")
     ResponseEntity<Object> getUserPosts(@PathVariable UUID userId){
         GenericResponse response = getAllUserPostsService.execute(userId);
+
+        return ResponseEntity.status(response.status()).body(response.data());
+    }
+
+    @Operation(summary = "Asks to gpt to create a post caption", description = "Asks to gpt to create a post caption")
+    @ApiResponse(responseCode = "201", description = "Caption created", content = @Content(schema = @Schema(example = "GPT generated caption")))
+    @PostMapping("/askToGpt")
+    ResponseEntity<Object> askGTPToGenerateCaption(@RequestBody String question){
+        GenericResponse response = askToGPTCreateCaptionService.execute(question);
 
         return ResponseEntity.status(response.status()).body(response.data());
     }

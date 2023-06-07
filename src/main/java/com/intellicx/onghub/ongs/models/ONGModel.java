@@ -1,43 +1,28 @@
 package com.intellicx.onghub.ongs.models;
 
-import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import com.intellicx.onghub.contributors.models.ContributorModel;
+import com.intellicx.onghub.users.models.UserModel;
 import jakarta.persistence.*;
-import java.util.Date;
-import java.util.UUID;
+import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Table(name = "tb_ongs")
 @Entity
-public class ONGModel {
-    private static final UUID serialVersionUID = new UUID(1L, 1L);
+public class ONGModel extends UserModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @ManyToMany(mappedBy = "ongs")
+    private List<ContributorModel> contributors;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "pix_key")
+    private String pixKey;
 
-    @Column(nullable = false)
-    private String email;
+    @Column(name = "website_url")
+    private String websiteUrl;
 
-    @Column()
-    private String pix;
+    public ONGModel() {
+        this.setRole("ONG");
+    }
 
-    @Column()
-    private String siteUrl;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    @CreationTimestamp
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    private Date updatedAt;
-
-    @Column(name = "deleted_at")
-    private Date deletedAt;
 }

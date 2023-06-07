@@ -39,7 +39,7 @@ public class OngsController {
 
     @Operation(summary = "Lists all ONGs", description = "Lists all ONGs")
     @ApiResponse(responseCode = "200", description = "Registred ONGs", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ONGModel.class))))
-    @GetMapping("")
+    @GetMapping()
     ResponseEntity<Object> getAllOngs() {
         GenericResponse response = this.getAllOngsService.execute();
 

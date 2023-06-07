@@ -4,6 +4,7 @@ import com.intellicx.onghub.ongs.dtos.CreateOrUpdateOngDto;
 import com.intellicx.onghub.ongs.models.ONGModel;
 import com.intellicx.onghub.ongs.repositories.OngsRepository;
 import com.intellicx.onghub.shared.generics.GenericResponse;
+import com.intellicx.onghub.shared.generics.ResponseData;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +23,13 @@ public class DeleteOngService {
 
         Optional<ONGModel> ong = this.ongsRepository.findById(id);
 
-        if (ong.isEmpty()) return new GenericResponse(404, "ONG not found!");
+        if (ong.isEmpty()) return new GenericResponse(404, new ResponseData("ONG not found!"));
 
         ONGModel foundOng = ong.get();
         foundOng.setDeletedAt(new Date());
 
         ONGModel softDeletedOng = this.ongsRepository.softDelete(id);
 
-        return new GenericResponse(200, softDeletedOng);
+        return new GenericResponse(200, new ResponseData(softDeletedOng));
     }
 }

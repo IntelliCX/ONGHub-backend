@@ -3,6 +3,7 @@ package com.intellicx.onghub.ongs.services;
 import com.intellicx.onghub.ongs.models.ONGModel;
 import com.intellicx.onghub.ongs.repositories.OngsRepository;
 import com.intellicx.onghub.shared.generics.GenericResponse;
+import com.intellicx.onghub.shared.generics.ResponseData;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,6 @@ public class GetAllOngsService {
     public GenericResponse execute() {
         List<ONGModel> ongs = this.ongsRepository.findAll();
 
-        return new GenericResponse(200, ongs);
+        return new GenericResponse(200, new ResponseData(ongs));
     }
 }

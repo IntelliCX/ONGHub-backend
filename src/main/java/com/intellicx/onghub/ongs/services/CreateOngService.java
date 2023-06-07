@@ -4,6 +4,7 @@ import com.intellicx.onghub.shared.generics.GenericResponse;
 import com.intellicx.onghub.ongs.dtos.CreateOrUpdateOngDto;
 import com.intellicx.onghub.ongs.models.ONGModel;
 import com.intellicx.onghub.ongs.repositories.OngsRepository;
+import com.intellicx.onghub.shared.generics.ResponseData;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class CreateOngService {
     public GenericResponse<ONGModel> execute(CreateOrUpdateOngDto createOrUpdateOngDto){
         Optional<ONGModel> foundOng = ongsRepository.findByemail(createOrUpdateOngDto.getEmail());
 
-        if (foundOng.isPresent()) return new GenericResponse(409, "This email is already registred!");
+        if (foundOng.isPresent()) return new GenericResponse(409, new ResponseData("This email is already registred!"));
 
         ONGModel ongModel = new ONGModel();
 
@@ -27,6 +28,6 @@ public class CreateOngService {
 
         ONGModel createdOng = ongsRepository.save(ongModel);
 
-        return new GenericResponse(200, createdOng);
+        return new GenericResponse(200, new ResponseData(createdOng));
     }
 }

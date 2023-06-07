@@ -18,6 +18,10 @@ public class CreateOrUpdateOngDto {
     @Size(max = 255)
     private String email;
 
+    @Schema(example = "ONG cellphone")
+    @Size(max = 11)
+    private String cellphone;
+
     @Schema(example = "ONG pix key")
     @NotNull(message = "ONG pix key is mandatory!")
     @Size(max = 255)

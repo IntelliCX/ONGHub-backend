@@ -17,6 +17,6 @@ public class GetAllPostsService {
     }
 
     public GenericResponse<List<PostModel>> execute() {
-        return new GenericResponse(200, new ResponseData(postsRepository.findAll()));
+        return new GenericResponse<>(200, new ResponseData<>(postsRepository.findAll()));
     }
 }

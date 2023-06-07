@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 public class CreatePostDto {
     @Schema(implementation = UUID.class)
-    private UUID ongId;
+    private UUID userId;
 
     @Schema(example = "post caption")
     @Size(max = 255)

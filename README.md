@@ -27,6 +27,10 @@
   <h2> Endpoint's </h2>
 </div>
 
+* <b> Swagger: </b> <i> Para ter acesso à uma documentação mais completa você pode utilizar o Swagger para visualizar a documentação, basta acessar com a aplicação rodando o link: <b> http://localhost:8080/swagger </b> </i>
+
+<br/>
+
 - `POST /contributors/create`
   - <b> Descrição: </b> <i> Cria o perfil de um contribuidor. </i>
   - <b> Parâmetros: <i> Sem parâmetros. </i> </b>

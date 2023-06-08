@@ -5,11 +5,23 @@
 ## Descrição
 * <i> Visando potencializar a visibilidade e influência de organizações não governamentais, nós da IntelliCX elaboramos e desenvolvemos o ONGHub, uma espécie de "rede social" para ONG's com foco em auxílio alimentar. No ONGHub as Organizações poderão publicar e divulgar os seus eventos beneficentes para que cheguem até os usuários da plataforma e os mesmos possam se solidarizar e colaborar, seja financeiramente ou fisicamente, com a Organização e suas ações. </i>
 
-## Endpoints
+## Utilização da API
 
-* <b> A seguir, estão os principais endpoints da API: </b>
+* <b> Requerimentos: </b> <i> Possuir Docker e Docker-Compose instalados na máquina. Caso não possua, segue links de auxílio para instalação: </i>
+  * <b> Windows:</b> <i> https://learn.microsoft.com/pt-br/virtualization/windowscontainers/manage-docker/configure-docker-daemon </i>
+  * <b> Linux:</b> <i> https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt </i>
 
-<br/>
+* <b> Para utilizar a API: </b>
+  * Estando dentro da raíz do projeto, entre no terminal e insira o seguinte comando:
+    * <b> Windows:</b>
+      ```
+      docker-compose up
+      ```
+    
+    * <b> Linux:</b>
+      ```
+      sudo docker-compose up
+      ```
 
 <div align="center" >
   <h2> Endpoint's </h2>

@@ -15,12 +15,12 @@
   * Estando dentro da raíz do projeto, entre no terminal e insira o seguinte comando:
     * <b> Windows:</b>
       ```
-      docker-compose up
+      docker-compose up OU docker compose up
       ```
     
     * <b> Linux:</b>
       ```
-      sudo docker-compose up
+      sudo docker-compose up OU sudo docker compose up
       ```
 
 <div align="center" >
